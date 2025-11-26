@@ -23,8 +23,8 @@ Both tasks use **Apache Spark Structured Streaming** and **Spark MLlib** to trai
     └── fare_trend_model_v2/  
 ├── README.md
 └── screenshots/
-    ├── task4_output.png
-    ├── task5_output.png
+    ├── task4img.png
+    ├── task5img.png
 ```
 
 > NOTE: The `screenshots/` folder can be renamed or reorganized as needed.
@@ -46,11 +46,11 @@ Train a **Linear Regression** model using historical ride data and apply it to *
    * Casts `distance_km` and `fare_amount` columns to `DoubleType`
    * Uses a `VectorAssembler` to create `features`
    * Trains a **Linear Regression** model to predict `fare_amount`
-   * Saves model → `models/fare_model/`
+   * Saves model to `models/fare_model/`
 
 2. **Streaming Inference**
 
-   * Reads live JSON input from socket: `nc -lk 9999`
+   * Reads live JSON input from socket
    * Parses JSON using a defined schema
    * Uses same `VectorAssembler` to prepare streaming features
    * Loads the saved regression model
@@ -150,5 +150,27 @@ python task5.py
 
 ---
 
+# Final Explanation/Approach
 
-# Final Explanations/Approach
+### **Task 4 – Real-Time Fare Prediction**
+
+* Loaded the historical `training-dataset.csv` and cast numeric columns (`distance_km`, `fare_amount`) to `DoubleType` for ML compatibility.
+* Used a **VectorAssembler** to create a feature vector from `distance_km`.
+* Trained a **Linear Regression model** to predict `fare_amount` based on distance.
+* Saved the trained model locally so it can be reused during streaming.
+* Implemented a **Spark Structured Streaming** pipeline that listens on a socket 
+* Parsed incoming JSON trips, applied the same feature assembly, and generated live **predicted_fare** values.
+* Output real-time results in `append` mode to the console.
+
+---
+
+### **Task 5 – Deviation-Based Anomaly Detection**
+
+* Extended the Task 4 streaming pipeline by calculating the **absolute deviation** between actual and predicted fare:
+  `deviation = |fare_amount - predicted_fare|`.
+* Used this deviation metric to identify potential anomalies such as overcharging or incorrect fare calculations.
+* Ensured consistent schema and matching feature engineering between training and inference.
+* Displayed final streaming output including:
+  `trip_id, driver_id, distance_km, fare_amount, predicted_fare, deviation`.
+
+---
