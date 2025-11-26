@@ -115,7 +115,7 @@ Example row:
 
 ## **Task 5 – Output Screenshot**
 
-![Task 5 Output](./screenshot/task5img.png)
+![Task 5 Output](./screenshots/task5img.png)
 ---
 
 # **How to Run**
