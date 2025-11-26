@@ -15,11 +15,12 @@ Both tasks use **Apache Spark Structured Streaming** and **Spark MLlib** to trai
 
 ```
 .
-├── task4_fare_prediction.py       # Offline model training + real-time prediction
-├── task5_anomaly_detection.py     # Includes deviation scoring for anomalies
-├── training-dataset.csv           # Provided dataset
+├── task4.py       # Offline model training + real-time prediction
+├── task5.py     # Includes deviation scoring for anomalies
+├── data_generator.csv           # Provided dataset
 ├── models/
 │   └── fare_model/                # Saved Linear Regression model
+    └── fare_trend_model_v2/  
 ├── README.md
 └── screenshots/
     ├── task4_output.png
@@ -72,15 +73,7 @@ Columns printed in streaming output:
 
 ##  **Task 4 – Output Screenshot**
 
-Task 4:
--------------------------------------------
-Batch: 6
--------------------------------------------
-+------------------------------------+---------+-----------+-----------+-----------------+-----------------+
-|trip_id                             |driver_id|distance_km|fare_amount|predicted_fare   |deviation        |
-+------------------------------------+---------+-----------+-----------+-----------------+-----------------+
-|a9f13e2a-c7c3-4e5b-b18d-ac97d5e4dab5|31       |29.19      |83.61      |90.97414083595437|7.364140835954373|
-+------------------------------------+---------+-----------+-----------+-----------------+-----------------+
+![Task 4 Output](./screenshots/task4img.png)
 
 
 
@@ -122,17 +115,7 @@ Example row:
 
 ## **Task 5 – Output Screenshot**
 
-
-Task 5:
--------------------------------------------                                     
-Batch: 85
--------------------------------------------
-+-------------------+-------------------+-----------------+-----------------------+
-|window_start       |window_end         |avg_fare         |predicted_next_avg_fare|
-+-------------------+-------------------+-----------------+-----------------------+
-|2025-11-26 19:42:00|2025-11-26 19:47:00|76.24856666666669|92.39431034482759      |
-+-------------------+-------------------+-----------------+-----------------------+
-
+![Task 5 Output](./screenshot/task5img.png)
 ---
 
 # **How to Run**
